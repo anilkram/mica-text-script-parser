@@ -10,7 +10,7 @@ import PyPDF2
 __detailedlog__ = True
 
 #leave this variable blank if there are no noisy scripts
-noisy_movies='../Data/noisy_movies_list.txt'
+noisy_movies='../mica-data/noisy_movies_list.txt'
 
 class extract_scripts:
     def __init__(self,html_dir,pdf_dir,text_dir):

@@ -91,7 +91,7 @@ class script_parser:
             #get indent size for this movie
             match=whitespace.match(line)
             if match!=None:
-                cur_indent=match.span()[1]-match.span()[0]
+                cur_indent=match.span()[0]-match.span()[0]
                 if cur_indent<min_indent:
                     min_indent=cur_indent
             else:
@@ -105,9 +105,11 @@ class script_parser:
                     continue
 
             #skip lines that describe movie setting: interior or exterior
+            
             if location.match(line):
+                lines.append(line)
                 continue
-
+            
             #skip lines containing page numbers
             if pagenumber.match(line):
                 continue
@@ -123,12 +125,18 @@ class script_parser:
         i=0 
         context=[]
         utterances=[]
-
+        scene_start = 0
+        LOCATION = []
         while i<len(lines):
             line=lines[i]
             line=line[min_indent:]
             line_copy=line
             i+=1
+            if location.match(line) or "ext." in line or "int." in line:
+                if len(utterances) >= 1:
+                    if utterances[-1] != '##### Scene Change #####':
+                        utterances.append("##### Scene Change #####")
+#                    continue
 
             if i==len(lines):
                 context.append(line)

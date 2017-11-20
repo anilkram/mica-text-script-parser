@@ -6,16 +6,17 @@ from extract_scripts import *
 from parse_scripts import *
 from distutils.util import strtobool
 
-html_dir = '../Data/scripts_html'
-pdf_dir = '../Data/scripts_pdf'
-text_dir = '../Data/scripts_txt'
-out_dir = '../Data/utterances_with_charnames'
+html_dir = '../mica-data/scripts_html'
+pdf_dir = '../mica-data/scripts_pdf'
+text_dir = '../mica-data/scripts_txt'
+out_dir = '../mica-data/utterances_with_charnames'
 
 if len(sys.argv)==1:
     fetch_and_parse_first = True
 else:
     fetch_and_parse_first = strtobool(sys.argv[1])
-    
+
+'''
 if fetch_and_parse_first:
     #Get imsdb scripts
     f=fetch_scripts('imsdb', html_dir, pdf_dir, text_dir)
@@ -28,7 +29,7 @@ if fetch_and_parse_first:
     #Extract text scripts from fetched html files
     e=extract_scripts(html_dir, pdf_dir, text_dir)
     e.extract_scripts()
-
+'''
 files=os.listdir(text_dir)
 
 for file in files:
